@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CertificateRequest.xsd">
+    <application>
+        <certificates>
+            <certificate>
+                <certificatechain>true</certificatechain>
+                <tbscertificate>
+                    <subject>
+                        <entityname>SmrsWeb_##hostname##</entityname>
+                        <distinguishname>CN=SmrsWeb_##hostname##</distinguishname>
+                    </subject>
+                    <certificateextension>
+                        <subjectalternativename>
+                            <ipaddress>cm_VIP</ipaddress>
+                            <ipaddress>cm_ipv6_VIP</ipaddress>
+                        </subjectalternativename>
+                    </certificateextension>
+                </tbscertificate>
+                <endentityprofilename>ENM_System_HTTPS_SBI_EP</endentityprofilename>
+                <keystore>
+                    <jkskeystore>
+                        <storealias>smrsweb-keystore</storealias>
+                        <storelocation>/ericsson/cert/data/certs/smrswebkey.jks</storelocation>
+                        <storepassword>smrswebcert</storepassword>
+                    </jkskeystore>
+                </keystore>
+                <truststore>
+                    <jkstruststore>
+                        <storealias>smrsweb-truststore</storealias>
+                        <storelocation>/ericsson/cert/data/certs/smrswebtrust.jks</storelocation>
+                        <storepassword>smrswebcert</storepassword>
+                    </jkstruststore>
+                </truststore>
+                <oncheckresult>
+                    <actionlist>
+                        <checkcause>certificateUpdate</checkcause>
+                        <checkcause>trustUpdate</checkcause>
+                        <action>HTTPSConnectorRestart</action>
+                        <command>
+                            <pathname></pathname>
+                            <parameter>
+                                <name>port</name>
+                                <value>2701</value>
+                            </parameter>
+                        </command>
+                    </actionlist>
+                </oncheckresult>
+            </certificate>
+        </certificates>
+        <crlupdatemode>CrlRequired</crlupdatemode>
+    </application>
+    <user>
+        <!-- keep in the same line to allow grep researches -->
+        <username>jboss_user</username>
+        <usergroup>jboss</usergroup>
+    </user>
+</applications>

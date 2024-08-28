@@ -1,0 +1,3 @@
+#Updating the deployment-timeout to prevent jboss deployment timeout of dependent archives.
+if (outcome == success) of /subsystem=deployment-scanner/scanner=default:write-attribute(name=deployment-timeout, value=1500)
+end-if

@@ -1,0 +1,2 @@
+if (outcome == success) of /system-property=jboss.as.management.blocking.timeout:add(value=900)
+end-if

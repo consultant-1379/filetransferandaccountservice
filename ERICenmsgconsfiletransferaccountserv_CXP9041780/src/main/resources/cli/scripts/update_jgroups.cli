@@ -1,0 +1,11 @@
+# Set the properties for the UDP protocol in transport
+/subsystem=jgroups/stack=udp/transport=UDP:write-attribute(name=properties,value={enable_diagnostics=true})
+
+if (outcome == success) of /subsystem=jgroups/stack=udp/protocol=FD_SOCK:read()
+/subsystem=jgroups/stack=udp/protocol=FD_SOCK:remove()
+end-if
+if (outcome == success) of /subsystem=jgroups/stack=udp/protocol=FD_SOCK:add(socket-binding=jgroups-udp-fd)
+end-if
+
+if (outcome == success) of /subsystem=jgroups/stack=udp/protocol=RSVP:add()
+end-if

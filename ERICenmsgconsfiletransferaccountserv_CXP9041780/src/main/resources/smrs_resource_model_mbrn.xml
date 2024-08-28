@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configEntity xmlns="http://www.ericsson.com/oss/itpf/deployment/dst/descriptor">
+  <description>Consolidated File Transfer and Account Service</description>
+  <singleton>true</singleton>
+  <scaleUnit>
+    <minimumUnit>
+      <!--zero numeric fields or blank calculations if you dont have CPU figures for approval-->
+      <profile>
+        <cpuCores>4</cpuCores>
+        <cpuMinutes>128</cpuMinutes>
+        <peakCpuMinutes></peakCpuMinutes>
+        <memory>8192</memory>
+      </profile>
+      <profileConversionFormulae>
+        <cpuCores>4</cpuCores>
+        <cpuMinutes>128</cpuMinutes>
+        <peakCpuMinutes>0</peakCpuMinutes>
+        <memory>8192</memory>
+      </profileConversionFormulae>
+    </minimumUnit>
+    <optimalUnit>
+      <!--zero numeric fields or blank calculations if you dont have CPU figures for approval-->
+      <profile>
+        <cpuCores>4</cpuCores>
+        <cpuMinutes>2150</cpuMinutes>
+        <peakCpuMinutes>0</peakCpuMinutes>
+        <memory>8192</memory>
+      </profile>
+      <profileConversionFormulae>
+        <cpuCores>4</cpuCores>
+        <cpuMinutes>if(enm_deployment_type="ENM_extra_small",2150,0)</cpuMinutes>
+        <peakCpuMinutes>0</peakCpuMinutes>
+        <memory>8192</memory>
+      </profileConversionFormulae>
+    </optimalUnit>
+  </scaleUnit>
+</configEntity>

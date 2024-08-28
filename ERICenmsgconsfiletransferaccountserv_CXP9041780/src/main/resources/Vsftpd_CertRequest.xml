@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="CertificateRequest.xsd">
+    <application>
+        <certificates>
+            <certificate>
+            <certificatechain>true</certificatechain>
+                <tbscertificate>
+                    <subject>
+                        <entityname>##hostname##_FTPES_SERVER</entityname>
+                        <distinguishname>CN=##hostname##_FTPES_SERVER</distinguishname>
+                    </subject>
+                </tbscertificate>
+                  <endentityprofilename>ENM_System_SBI_COM_TPFC_EP</endentityprofilename>
+                <keystore>
+                    <base64keystore>
+                        <storealias>ftpes</storealias>
+                        <keyfilelocation>/ericsson/cert/data/certs/vsftpd/vsftpd.key</keyfilelocation>
+                        <certificatefilelocation>/ericsson/cert/data/certs/vsftpd/vsftpd.pem</certificatefilelocation>
+                    </base64keystore>
+                </keystore>
+
+                <truststore>
+                    <base64truststore>
+                        <storealias>ftpesCA</storealias>
+                        <storelocation>/ericsson/cert/data/certs/CA/vsftpd.pem</storelocation>
+                        <storepassword></storepassword>
+                    </base64truststore>
+                </truststore>
+
+                <crlstore>
+                    <base64crlstore>
+                        <storealias>ftpesCRL</storealias>
+                        <storefolder>/ericsson/cert/data/certs/CRL/</storefolder>
+                        <storepassword></storepassword>
+                    </base64crlstore>
+                </crlstore>
+
+                <oncheckresult>
+                    <actionlist>
+                        <checkcause>certificateUpdate</checkcause>
+                        <checkcause>trustUpdate</checkcause>
+                        <action>RunScript</action>
+                        <command>
+                            <pathname>/ericsson/3pp/jboss/bin/post-start/ftpes-config.sh</pathname>
+                        </command>
+                    </actionlist>
+                </oncheckresult>
+            </certificate>
+        </certificates>
+            <crlupdatemode>CrlRequired</crlupdatemode>
+
+    </application>
+
+    <user>
+        <username>root</username>
+        <usergroup>root</usergroup>
+    </user>
+
+</applications>

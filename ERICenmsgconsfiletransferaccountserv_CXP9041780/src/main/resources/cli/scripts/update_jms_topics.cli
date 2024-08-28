@@ -1,0 +1,5 @@
+echo "Adding Topic entries"
+if (outcome == success) of /subsystem=messaging-activemq/server=default/jms-topic=ClusteredSmrsServiceFileDeletionNotificationTopic:add(entries=[topic/SmrsServiceFileDeletionNotificationTopic-amq java:jboss/exported/jms/topic/SmrsServiceFileDeletionNotificationTopic-amq])
+end-if
+if (outcome == success) of /subsystem=messaging-activemq/server=default/jms-topic=modelDeploymentEvents:add(entries=[topic/modelDeploymentEvents-amq java:jboss/exported/jms/topic/modelDeploymentEvents-amq])
+end-if

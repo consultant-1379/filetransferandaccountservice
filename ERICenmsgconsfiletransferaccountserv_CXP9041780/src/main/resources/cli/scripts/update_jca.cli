@@ -1,0 +1,10 @@
+if (outcome == success) of /subsystem=jca:read-resource()
+/subsystem=jca/workmanager=default/short-running-threads=default:write-attribute(name=core-threads,value=50)
+/subsystem=jca/workmanager=default/short-running-threads=default:write-attribute(name=queue-length, value=50)
+/subsystem=jca/workmanager=default/short-running-threads=default:write-attribute(name=max-threads, value=50)
+/subsystem=jca/workmanager=default/short-running-threads=default:write-attribute(name=keepalive-time.time, value=10)
+/subsystem=jca/workmanager=default/long-running-threads=default:write-attribute(name=core-threads,value=50)
+/subsystem=jca/workmanager=default/long-running-threads=default:write-attribute(name=queue-length, value=50)
+/subsystem=jca/workmanager=default/long-running-threads=default:write-attribute(name=max-threads, value=50)
+/subsystem=jca/workmanager=default/long-running-threads=default:write-attribute(name=keepalive-time.time, value=10)
+end-if

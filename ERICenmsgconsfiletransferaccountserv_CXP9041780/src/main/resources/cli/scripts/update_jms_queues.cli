@@ -1,0 +1,10 @@
+# Queues
+echo "Adding Queue entries"
+if (outcome == success) of /subsystem=messaging-activemq/server=default/jms-queue=ExpiryQueue:add(entries=[queue/ExpiryQueue-amq])
+end-if
+if (outcome == success) of /subsystem=messaging-activemq/server=default/jms-queue=DLQ:add(entries=[queue/DLQ-amq])
+end-if
+if (outcome == success) of /subsystem=messaging-activemq/server=default/jms-queue=ClusteredShmNodeLicenseRefreshRequestQueue:add(entries=[queue/ShmNodeLicenseRefreshRequestQueue-amq java:jboss/exported/jms/queue/ShmNodeLicenseRefreshRequestQueue-amq])
+end-if
+if (outcome == success) of /subsystem=messaging-activemq/server=default/jms-queue=ClusteredEventBasedMediationClient:add(entries=[queue/MediationClientConsumerQueue-amq])
+end-if

@@ -1,0 +1,10 @@
+if (outcome != success) of /socket-binding-group=standard-sockets/socket-binding=https:read-resource()
+/socket-binding-group=standard-sockets/socket-binding=https:add(interface=public, port=2701)
+end-if
+if (outcome == success) of /socket-binding-group=standard-sockets/socket-binding=https:write-attribute(name=interface, value=public)
+end-if
+if (outcome == success) of /socket-binding-group=standard-sockets/socket-binding=https:write-attribute(name=port, value=2701)
+end-if
+
+if (outcome == success) of /socket-binding-group=standard-sockets/socket-binding=httpsv6:add(interface=ipv6vip, port=2701)
+end-if

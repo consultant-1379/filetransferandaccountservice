@@ -1,0 +1,9 @@
+if (outcome == success) of /extension=org.jboss.as.ejb3:read-resource()
+/subsystem=ejb3/thread-pool=default:write-attribute(name=max-threads, value=128)
+end-if
+
+if (outcome == success) of /subsystem=ejb3/strict-max-bean-instance-pool=slsb-strict-max-pool:write-attribute(name=max-pool-size, value=128)
+end-if
+
+if (outcome == success) of /subsystem=ejb3/strict-max-bean-instance-pool=mdb-strict-max-pool:write-attribute(name=max-pool-size, value=64)
+end-if

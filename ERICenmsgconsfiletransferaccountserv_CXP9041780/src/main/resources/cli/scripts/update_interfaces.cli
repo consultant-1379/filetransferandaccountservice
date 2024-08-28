@@ -1,0 +1,2 @@
+if (outcome == success) of /interface=ipv6vip:add(inet-address="$${cm_ipv6_VIP:[::1]}")
+end-if

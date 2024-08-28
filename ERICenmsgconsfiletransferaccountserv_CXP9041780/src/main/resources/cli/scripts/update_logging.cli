@@ -1,0 +1,19 @@
+#Update the server.log configuration
+if (outcome == success) of /subsystem=logging/size-rotating-file-handler=ENM_FILE:write-attribute(name=rotate-size, value=200m)
+end-if
+if (outcome == success) of /subsystem=logging/size-rotating-file-handler=ENM_FILE:write-attribute(name=max-backup-index, value=5)
+end-if
+
+if (outcome == success) of /subsystem=logging/logger=com.ericsson.nms.security.ra.FileConnectionImpl:add()
+end-if
+if (outcome == success) of /subsystem=logging/logger=com.ericsson.nms.security.ra.FileConnectionImpl:write-attribute(name=level, value=ERROR)
+end-if
+if (outcome == success) of /subsystem=logging/logger=com.ericsson.nms.security.ra.FileConnectionImpl:write-attribute(name=filter-spec, value=not(match("IOException while creating directory /home/smrs/oradio/|Error while flushing change")))
+end-if
+
+if (outcome == success) of /subsystem=logging/logger=org.jboss.as.ejb3.invocation:add()
+end-if
+if (outcome == success) of /subsystem=logging/logger=org.jboss.as.ejb3.invocation:write-attribute(name=level,value=ERROR)
+end-if
+if (outcome == success) of /subsystem=logging/logger=org.jboss.as.ejb3.invocation:write-attribute(name=filter-spec, value=not(match("EJB Invocation failed on component SmrsFileSystemHandlerServiceBean for method public void com.ericsson.oss.itpf.smrs.SmrsFileSystemHandlerServiceBean.ensureDirectoryExists")))
+end-if

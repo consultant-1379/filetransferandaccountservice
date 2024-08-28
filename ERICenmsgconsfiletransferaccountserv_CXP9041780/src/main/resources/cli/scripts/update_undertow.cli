@@ -1,0 +1,32 @@
+#Credentialmanager SSL configs
+echo "Running config for Credentialmanager SSL"
+if (outcome == success) of /core-service=management/security-realm=HTTPSCredMRealm/:add
+end-if
+if (outcome == success) of /core-service=management/security-realm=HTTPSCredMRealm/server-identity=ssl:add(alias="smrsweb-keystore", keystore-path="/ericsson/cert/data/certs/smrswebkey.jks", keystore-password="smrswebcert", protocol="TLS")
+end-if
+if (outcome == success) of /core-service=management/security-realm=HTTPSCredMRealm/authentication=truststore:add(keystore-path="/ericsson/cert/data/certs/smrswebtrust.jks", keystore-password="smrswebcert")
+end-if
+
+
+#Undertow config
+echo "Setting up listeners for undertow sybsystem"
+if (outcome == success) of /subsystem=undertow/server=default-server/http-listener=http:add(socket-binding=http)
+end-if
+
+#ajp-listeners config
+if (outcome == success) of /subsystem=undertow/server=default-server/ajp-listener=ajp:write-attribute(name="worker",value="ajp-executor")
+end-if
+if (outcome == success) of /subsystem=undertow/server=default-server/ajp-listener=ajp:write-attribute(name="socket-binding",value="ajp")
+end-if
+
+# credM config
+if (outcome == success) of /subsystem=undertow/server=default-server/https-listener=https:add(socket-binding="https", secure="true", security-realm="HTTPSCredMRealm", verify-client="REQUIRED")
+end-if
+if (outcome == success) of /subsystem=undertow/server=default-server/https-listener=httpsv6:add(socket-binding="httpsv6", secure="true", security-realm="HTTPSCredMRealm", verify-client="REQUIRED")
+end-if
+
+#disable protocol TLS 1.0 and 1.1 on https interfaces
+if (outcome == success) of /subsystem=undertow/server=default-server/https-listener=httpsv6:write-attribute(name=enabled-protocols,value="TLSv1.2,TLSv1.3")
+end-if
+if (outcome == success) of /subsystem=undertow/server=default-server/https-listener=https:write-attribute(name=enabled-protocols,value="TLSv1.2,TLSv1.3")
+end-if
